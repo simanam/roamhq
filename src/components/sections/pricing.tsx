@@ -188,7 +188,7 @@ export function Pricing() {
                     : ""
                 )}
                 variant={plan.highlighted ? "primary" : "outline"}
-                onClick={openWaitlist}
+                onClick={() => openWaitlist("choose")}
               >
                 {plan.cta}
               </Button>
