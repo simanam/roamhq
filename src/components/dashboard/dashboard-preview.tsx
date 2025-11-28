@@ -100,7 +100,7 @@ export function DashboardPreview() {
             </div>
 
             {/* Dashboard Content */}
-            <div className="flex min-h-[600px]">
+            <div className="flex min-h-[400px] sm:min-h-[600px]">
               {/* Sidebar */}
               <div className="w-64 bg-slate-900/50 border-r border-white/5 p-4 hidden lg:block">
                 {/* Logo */}
@@ -158,14 +158,14 @@ export function DashboardPreview() {
               </div>
 
               {/* Main Content */}
-              <div className="flex-1 p-6">
+              <div className="flex-1 p-4 sm:p-6">
                 {/* Top Bar */}
-                <div className="flex items-center justify-between mb-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                   <div>
-                    <h1 className="text-xl font-semibold text-white">Dashboard</h1>
-                    <p className="text-sm text-slate-400">Welcome back, here&apos;s your campaign overview</p>
+                    <h1 className="text-lg sm:text-xl font-semibold text-white">Dashboard</h1>
+                    <p className="text-xs sm:text-sm text-slate-400">Welcome back, here&apos;s your campaign overview</p>
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="hidden sm:flex items-center gap-3">
                     <div className="relative">
                       <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
                       <input
@@ -185,7 +185,7 @@ export function DashboardPreview() {
                 </div>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6">
                   <StatCard
                     label="Total Impressions"
                     value={liveImpressions}
@@ -214,22 +214,22 @@ export function DashboardPreview() {
                 </div>
 
                 {/* Chart and Map Row */}
-                <div className="grid lg:grid-cols-5 gap-6 mb-6">
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6 mb-6">
                   {/* Chart */}
-                  <div className="lg:col-span-3 bg-slate-800/30 rounded-xl p-5 border border-white/5">
-                    <div className="flex items-center justify-between mb-6">
+                  <div className="lg:col-span-3 bg-slate-800/30 rounded-xl p-4 sm:p-5 border border-white/5">
+                    <div className="flex items-center justify-between mb-4 sm:mb-6">
                       <div>
-                        <h3 className="text-white font-medium">Impressions Overview</h3>
-                        <p className="text-sm text-slate-500">Last 7 days</p>
+                        <h3 className="text-white font-medium text-sm sm:text-base">Impressions Overview</h3>
+                        <p className="text-xs sm:text-sm text-slate-500">Last 7 days</p>
                       </div>
-                      <button className="flex items-center gap-2 text-sm text-slate-400 bg-slate-800/50 px-3 py-1.5 rounded-lg">
+                      <button className="hidden sm:flex items-center gap-2 text-sm text-slate-400 bg-slate-800/50 px-3 py-1.5 rounded-lg">
                         This Week
                         <ChevronDown className="w-4 h-4" />
                       </button>
                     </div>
 
                     {/* Simple Bar Chart */}
-                    <div className="flex items-end justify-between gap-2 h-40">
+                    <div className="flex items-end justify-between gap-1 sm:gap-2 h-32 sm:h-40">
                       {chartData.map((item, index) => (
                         <div key={item.day} className="flex-1 flex flex-col items-center gap-2">
                           <motion.div
@@ -254,12 +254,12 @@ export function DashboardPreview() {
                   </div>
 
                   {/* Mini Map */}
-                  <div className="lg:col-span-2 bg-slate-800/30 rounded-xl p-5 border border-white/5">
+                  <div className="lg:col-span-2 bg-slate-800/30 rounded-xl p-4 sm:p-5 border border-white/5">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-white font-medium">Live Locations</h3>
-                      <button className="text-electric-indigo text-sm">View Map</button>
+                      <h3 className="text-white font-medium text-sm sm:text-base">Live Locations</h3>
+                      <button className="text-electric-indigo text-xs sm:text-sm">View Map</button>
                     </div>
-                    <div className="aspect-square rounded-lg relative overflow-hidden">
+                    <div className="aspect-video sm:aspect-square rounded-lg relative overflow-hidden">
                       <MiniMap
                         className="w-full h-full"
                         showRoutes={true}
@@ -274,11 +274,11 @@ export function DashboardPreview() {
                   </div>
                 </div>
 
-                {/* Active Trucks Table */}
-                <div className="bg-slate-800/30 rounded-xl border border-white/5 overflow-hidden">
-                  <div className="flex items-center justify-between p-5 border-b border-white/5">
-                    <h3 className="text-white font-medium">Active Trucks</h3>
-                    <button className="text-electric-indigo text-sm">View All</button>
+                {/* Active Trucks Table - hidden on very small screens */}
+                <div className="hidden sm:block bg-slate-800/30 rounded-xl border border-white/5 overflow-hidden">
+                  <div className="flex items-center justify-between p-4 sm:p-5 border-b border-white/5">
+                    <h3 className="text-white font-medium text-sm sm:text-base">Active Trucks</h3>
+                    <button className="text-electric-indigo text-xs sm:text-sm">View All</button>
                   </div>
                   <div className="overflow-x-auto">
                     <table className="w-full">
@@ -339,7 +339,7 @@ export function DashboardPreview() {
         </motion.div>
 
         {/* Feature Callouts */}
-        <div className="mt-12 grid md:grid-cols-3 gap-6">
+        <div className="mt-8 sm:mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           {[
             { icon: MapPin, title: "See every truck's exact location", desc: "Real-time GPS tracking updated every 30 seconds" },
             { icon: TrendingUp, title: "Track impressions as they happen", desc: "Estimated impressions based on traffic data" },
@@ -350,14 +350,14 @@ export function DashboardPreview() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="flex items-start gap-4 p-6 bg-white rounded-xl shadow-sm"
+              className="flex items-start gap-3 sm:gap-4 p-4 sm:p-6 bg-white rounded-xl shadow-sm"
             >
               <div className="w-10 h-10 bg-electric-indigo/10 rounded-lg flex items-center justify-center shrink-0">
                 <feature.icon className="w-5 h-5 text-electric-indigo" />
               </div>
               <div>
-                <h4 className="font-semibold text-midnight">{feature.title}</h4>
-                <p className="text-sm text-slate-500 mt-1">{feature.desc}</p>
+                <h4 className="font-semibold text-midnight text-sm sm:text-base">{feature.title}</h4>
+                <p className="text-xs sm:text-sm text-slate-500 mt-1">{feature.desc}</p>
               </div>
             </motion.div>
           ))}
@@ -382,10 +382,10 @@ function StatCard({
   positive: boolean;
 }) {
   return (
-    <div className="bg-slate-800/30 rounded-xl p-4 border border-white/5">
-      <div className="text-sm text-slate-400 mb-1">{label}</div>
-      <div className="flex items-baseline gap-2">
-        <span className="text-2xl font-bold text-white font-display">
+    <div className="bg-slate-800/30 rounded-xl p-3 sm:p-4 border border-white/5">
+      <div className="text-xs sm:text-sm text-slate-400 mb-1 truncate">{label}</div>
+      <div className="flex items-baseline gap-1 sm:gap-2">
+        <span className="text-lg sm:text-2xl font-bold text-white font-display">
           {value.toLocaleString()}{suffix}
         </span>
         <span

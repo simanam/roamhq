@@ -116,9 +116,9 @@ export function Hero() {
 
             {/* CTAs */}
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
-              <Button size="lg" onClick={() => openWaitlist("brand")}>Launch Your Campaign</Button>
-              <a href="#how-it-works">
-                <Button variant="outline" size="lg">
+              <Button size="lg" className="w-full sm:w-auto" onClick={() => openWaitlist("brand")}>Launch Your Campaign</Button>
+              <a href="#how-it-works" className="w-full sm:w-auto">
+                <Button variant="outline" size="lg" className="w-full">
                   See How It Works
                 </Button>
               </a>

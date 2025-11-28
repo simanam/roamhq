@@ -26,7 +26,12 @@ interface LeafletMapProps {
   onTruckClick: (truck: TruckData) => void;
 }
 
-export default function LeafletMap({ trucks, routes, selectedTruckId, onTruckClick }: LeafletMapProps) {
+export default function LeafletMap({
+  trucks,
+  routes,
+  selectedTruckId,
+  onTruckClick,
+}: LeafletMapProps) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<L.Map | null>(null);
   const markersRef = useRef<L.Marker[]>([]);
@@ -36,10 +41,14 @@ export default function LeafletMap({ trucks, routes, selectedTruckId, onTruckCli
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
 
+    // Adjust zoom based on screen width for better mobile centering
+    const isMobile = window.innerWidth < 768;
+    const zoomLevel = isMobile ? 3 : 4;
+
     // Create map centered on US - disable all zoom interactions
     const mapInstance = L.map(mapContainer.current, {
       center: [39.8283, -98.5795],
-      zoom: 4,
+      zoom: zoomLevel,
       zoomControl: false,
       attributionControl: false,
       scrollWheelZoom: false,
@@ -47,18 +56,31 @@ export default function LeafletMap({ trucks, routes, selectedTruckId, onTruckCli
       touchZoom: false,
       boxZoom: false,
       keyboard: false,
-      dragging: true,
+      dragging: isMobile, // Allow dragging on mobile so users can pan
     });
 
     // Use CartoDB Dark Matter tiles (free, no API key needed)
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
-      maxZoom: 4,
-      minZoom: 4,
-    }).addTo(mapInstance);
+    L.tileLayer(
+      "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+      {
+        maxZoom: isMobile ? 3 : 4,
+        minZoom: isMobile ? 3 : 4,
+      }
+    ).addTo(mapInstance);
 
     map.current = mapInstance;
 
+    // Handle resize
+    const handleResize = () => {
+      const newIsMobile = window.innerWidth < 768;
+      const newZoom = newIsMobile ? 3 : 4;
+      mapInstance.setZoom(newZoom);
+    };
+
+    window.addEventListener("resize", handleResize);
+
     return () => {
+      window.removeEventListener("resize", handleResize);
       mapInstance.remove();
       map.current = null;
     };

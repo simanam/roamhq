@@ -105,7 +105,7 @@ export function ForFleets() {
               viewport={{ once: true }}
               className="mt-10"
             >
-              <Button size="lg" className="bg-lime text-midnight hover:bg-lime/90" onClick={() => openWaitlist("fleet")}>
+              <Button size="lg" className="w-full sm:w-auto bg-lime text-midnight hover:bg-lime/90" onClick={() => openWaitlist("fleet")}>
                 Join the Network
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
@@ -120,52 +120,52 @@ export function ForFleets() {
             className="relative"
           >
             {/* Earnings Card */}
-            <div className="bg-slate-800/50 backdrop-blur border border-white/10 rounded-2xl p-8">
+            <div className="bg-slate-800/50 backdrop-blur border border-white/10 rounded-2xl p-4 sm:p-8">
               {/* Before/After comparison mockup */}
-              <div className="grid grid-cols-2 gap-4 mb-8">
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
                 {/* Plain Truck */}
-                <div className="bg-slate-900/50 rounded-xl p-4 text-center">
-                  <div className="w-full aspect-[2/1] bg-slate-700/50 rounded-lg flex items-center justify-center mb-3">
-                    <Truck className="w-12 h-12 text-slate-500" />
+                <div className="bg-slate-900/50 rounded-xl p-3 sm:p-4 text-center">
+                  <div className="w-full aspect-[2/1] bg-slate-700/50 rounded-lg flex items-center justify-center mb-2 sm:mb-3">
+                    <Truck className="w-8 h-8 sm:w-12 sm:h-12 text-slate-500" />
                   </div>
-                  <span className="text-slate-500 text-sm">Before</span>
-                  <div className="text-white font-display text-lg">$0/mo</div>
+                  <span className="text-slate-500 text-xs sm:text-sm">Before</span>
+                  <div className="text-white font-display text-base sm:text-lg">$0/mo</div>
                 </div>
                 {/* Wrapped Truck */}
-                <div className="bg-gradient-to-br from-electric-indigo/20 to-cyan/20 rounded-xl p-4 text-center border border-electric-indigo/30">
-                  <div className="w-full aspect-[2/1] bg-gradient-to-r from-electric-indigo to-cyan rounded-lg flex items-center justify-center mb-3">
-                    <Truck className="w-12 h-12 text-white" />
+                <div className="bg-gradient-to-br from-electric-indigo/20 to-cyan/20 rounded-xl p-3 sm:p-4 text-center border border-electric-indigo/30">
+                  <div className="w-full aspect-[2/1] bg-gradient-to-r from-electric-indigo to-cyan rounded-lg flex items-center justify-center mb-2 sm:mb-3">
+                    <Truck className="w-8 h-8 sm:w-12 sm:h-12 text-white" />
                   </div>
-                  <span className="text-electric-indigo text-sm">With Roam</span>
-                  <div className="text-white font-display text-lg">$850+/mo</div>
+                  <span className="text-electric-indigo text-xs sm:text-sm">With Roam</span>
+                  <div className="text-white font-display text-base sm:text-lg">$850+/mo</div>
                 </div>
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-3 gap-2 sm:gap-4 py-4 sm:py-0">
                 {stats.map((stat) => (
                   <div key={stat.label} className="text-center">
-                    <div className="text-2xl font-bold text-white font-display">
+                    <div className="text-lg sm:text-2xl font-bold text-white font-display">
                       {stat.value}
-                      <span className="text-lime">{stat.suffix}</span>
+                      <span className="text-lime text-sm sm:text-2xl">{stat.suffix}</span>
                     </div>
-                    <div className="text-xs text-slate-400 mt-1">{stat.label}</div>
+                    <div className="text-[10px] sm:text-xs text-slate-400 mt-0.5 sm:mt-1 leading-tight">{stat.label}</div>
                   </div>
                 ))}
               </div>
 
               {/* Testimonial snippet */}
-              <div className="mt-8 pt-6 border-t border-white/10">
-                <p className="text-slate-300 italic text-sm">
+              <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-white/10">
+                <p className="text-slate-300 italic text-xs sm:text-sm">
                   &quot;We&apos;ve added $3,200/month to our bottom line without changing a single route. The extra income has been a game-changer.&quot;
                 </p>
                 <div className="mt-3 flex items-center gap-3">
-                  <div className="w-10 h-10 bg-slate-700 rounded-full flex items-center justify-center text-white font-bold">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-slate-700 rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-base">
                     JM
                   </div>
                   <div>
-                    <div className="text-white text-sm font-medium">John Martinez</div>
-                    <div className="text-slate-500 text-xs">Owner-Operator, 4 trucks</div>
+                    <div className="text-white text-xs sm:text-sm font-medium">John Martinez</div>
+                    <div className="text-slate-500 text-[10px] sm:text-xs">Owner-Operator, 4 trucks</div>
                   </div>
                 </div>
               </div>
