@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 
 interface LogoProps {
   variant?: "light" | "dark";
@@ -12,7 +13,7 @@ export function Logo({ variant = "dark", className }: LogoProps) {
   const textColor = variant === "light" ? "text-white" : "text-midnight";
 
   return (
-    <div className={cn("flex items-center gap-2", className)}>
+    <Link href="/#top" className={cn("flex items-center gap-2", className)}>
       <Image
         src="/roamlogo.png"
         alt="Roam"
@@ -23,6 +24,6 @@ export function Logo({ variant = "dark", className }: LogoProps) {
       <span className={cn("font-bold text-xl tracking-tight", textColor)}>
         ROAM
       </span>
-    </div>
+    </Link>
   );
 }
