@@ -88,7 +88,7 @@ export function WaitlistModal() {
 
   const getTitle = () => {
     if (isSuccess) return "You're on the list!";
-    if (currentType === "choose") return "Join the Waitlist";
+    if (currentType === "choose") return "Roam With Us";
     if (currentType === "brand") return "Launch Your Campaign";
     return "Join the Fleet Network";
   };
