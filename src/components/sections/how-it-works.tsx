@@ -97,7 +97,7 @@ export function HowItWorks() {
                     >
                       <step.icon className="w-6 h-6 text-white" />
                     </div>
-                    <span className="text-4xl font-bold text-slate-200 font-display">
+                    <span className="text-4xl font-bold text-slate-400 font-display">
                       {step.number}
                     </span>
                   </div>
