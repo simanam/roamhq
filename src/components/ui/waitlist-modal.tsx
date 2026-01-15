@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Loader2, CheckCircle2, Building2, Truck, ArrowRight } from "lucide-react";
 import { useWaitlist, WaitlistType } from "@/context/waitlist-context";
@@ -21,10 +21,55 @@ export function WaitlistModal() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState("");
 
+  // Refs for focus management
+  const modalRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const previousActiveElement = useRef<HTMLElement | null>(null);
+
   // Update currentType when waitlistType changes
   useEffect(() => {
     setCurrentType(waitlistType);
   }, [waitlistType]);
+
+  // Focus trap and focus management
+  useEffect(() => {
+    if (isOpen) {
+      // Store the previously focused element
+      previousActiveElement.current = document.activeElement as HTMLElement;
+
+      // Focus the close button when modal opens
+      setTimeout(() => {
+        closeButtonRef.current?.focus();
+      }, 100);
+    } else {
+      // Restore focus when modal closes
+      previousActiveElement.current?.focus();
+    }
+  }, [isOpen]);
+
+  // Handle keyboard events for focus trap and escape key
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === "Escape") {
+      handleClose();
+      return;
+    }
+
+    if (e.key === "Tab" && modalRef.current) {
+      const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (e.shiftKey && document.activeElement === firstElement) {
+        e.preventDefault();
+        lastElement?.focus();
+      } else if (!e.shiftKey && document.activeElement === lastElement) {
+        e.preventDefault();
+        firstElement?.focus();
+      }
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -115,6 +160,12 @@ export function WaitlistModal() {
 
           {/* Modal */}
           <motion.div
+            ref={modalRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="waitlist-modal-title"
+            aria-describedby="waitlist-modal-subtitle"
+            onKeyDown={handleKeyDown}
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -124,15 +175,17 @@ export function WaitlistModal() {
               {/* Header */}
               <div className={`bg-gradient-to-r ${getHeaderGradient()} p-6 relative`}>
                 <button
+                  ref={closeButtonRef}
                   onClick={handleClose}
+                  aria-label="Close dialog"
                   className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-5 h-5" aria-hidden="true" />
                 </button>
-                <h2 className="text-2xl font-bold text-white">
+                <h2 id="waitlist-modal-title" className="text-2xl font-bold text-white">
                   {getTitle()}
                 </h2>
-                <p className="text-white/80 mt-1">
+                <p id="waitlist-modal-subtitle" className="text-white/80 mt-1">
                   {getSubtitle()}
                 </p>
               </div>
@@ -146,7 +199,7 @@ export function WaitlistModal() {
                     className="text-center py-4"
                   >
                     <div className="w-16 h-16 bg-lime/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <CheckCircle2 className="w-8 h-8 text-lime" />
+                      <CheckCircle2 className="w-8 h-8 text-lime" aria-hidden="true" />
                     </div>
                     <p className="text-slate-600">
                       {currentType === "brand"
@@ -160,39 +213,45 @@ export function WaitlistModal() {
                 ) : currentType === "choose" ? (
                   // Type Selection View
                   <motion.div
+                    role="radiogroup"
+                    aria-label="Select user type"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="space-y-4"
                   >
                     <button
+                      role="radio"
+                      aria-checked={false}
                       onClick={() => selectType("brand")}
                       className="w-full p-4 border-2 border-slate-200 rounded-xl hover:border-electric-indigo hover:bg-electric-indigo/5 transition-all group text-left"
                     >
                       <div className="flex items-center gap-4">
                         <div className="w-12 h-12 bg-electric-indigo/10 rounded-full flex items-center justify-center group-hover:bg-electric-indigo/20 transition-colors">
-                          <Building2 className="w-6 h-6 text-electric-indigo" />
+                          <Building2 className="w-6 h-6 text-electric-indigo" aria-hidden="true" />
                         </div>
                         <div className="flex-1">
                           <h3 className="font-semibold text-midnight">I&apos;m a Brand</h3>
                           <p className="text-sm text-slate-500">I want to advertise on trucks</p>
                         </div>
-                        <ArrowRight className="w-5 h-5 text-slate-400 group-hover:text-electric-indigo transition-colors" />
+                        <ArrowRight className="w-5 h-5 text-slate-400 group-hover:text-electric-indigo transition-colors" aria-hidden="true" />
                       </div>
                     </button>
 
                     <button
+                      role="radio"
+                      aria-checked={false}
                       onClick={() => selectType("fleet")}
                       className="w-full p-4 border-2 border-slate-200 rounded-xl hover:border-lime hover:bg-lime/5 transition-all group text-left"
                     >
                       <div className="flex items-center gap-4">
                         <div className="w-12 h-12 bg-lime/10 rounded-full flex items-center justify-center group-hover:bg-lime/20 transition-colors">
-                          <Truck className="w-6 h-6 text-lime" />
+                          <Truck className="w-6 h-6 text-lime" aria-hidden="true" />
                         </div>
                         <div className="flex-1">
                           <h3 className="font-semibold text-midnight">I&apos;m a Fleet</h3>
                           <p className="text-sm text-slate-500">I want to earn from my trucks</p>
                         </div>
-                        <ArrowRight className="w-5 h-5 text-slate-400 group-hover:text-lime transition-colors" />
+                        <ArrowRight className="w-5 h-5 text-slate-400 group-hover:text-lime transition-colors" aria-hidden="true" />
                       </div>
                     </button>
                   </motion.div>
@@ -203,29 +262,31 @@ export function WaitlistModal() {
                     animate={{ opacity: 1, y: 0 }}
                     onSubmit={handleSubmit}
                     className="space-y-4"
+                    aria-describedby={error ? "brand-form-error" : undefined}
                   >
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-1">
+                      <label htmlFor="brand-name" className="block text-sm font-medium text-slate-700 mb-1">
                         Your Name
                       </label>
                       <input
                         type="text"
-                        id="name"
+                        id="brand-name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="John Smith"
                         required
+                        aria-invalid={!!error}
                         className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric-indigo focus:border-transparent transition-all"
                       />
                     </div>
 
                     <div>
-                      <label htmlFor="brandName" className="block text-sm font-medium text-slate-700 mb-1">
+                      <label htmlFor="brand-brandName" className="block text-sm font-medium text-slate-700 mb-1">
                         Brand Name
                       </label>
                       <input
                         type="text"
-                        id="brandName"
+                        id="brand-brandName"
                         value={brandName}
                         onChange={(e) => setBrandName(e.target.value)}
                         placeholder="Acme Inc."
@@ -235,12 +296,12 @@ export function WaitlistModal() {
                     </div>
 
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-1">
+                      <label htmlFor="brand-email" className="block text-sm font-medium text-slate-700 mb-1">
                         Email Address
                       </label>
                       <input
                         type="email"
-                        id="email"
+                        id="brand-email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="john@acme.com"
@@ -249,13 +310,17 @@ export function WaitlistModal() {
                       />
                     </div>
 
-                    {error && <p className="text-red-500 text-sm">{error}</p>}
+                    {error && (
+                      <p id="brand-form-error" role="alert" aria-live="assertive" className="text-red-500 text-sm">
+                        {error}
+                      </p>
+                    )}
 
-                    <Button type="submit" className="w-full" disabled={isLoading}>
+                    <Button type="submit" className="w-full" disabled={isLoading} aria-busy={isLoading}>
                       {isLoading ? (
                         <>
-                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                          Submitting...
+                          <Loader2 className="w-4 h-4 mr-2 animate-spin" aria-hidden="true" />
+                          <span role="status">Submitting...</span>
                         </>
                       ) : (
                         "Get Started"
@@ -277,29 +342,31 @@ export function WaitlistModal() {
                     animate={{ opacity: 1, y: 0 }}
                     onSubmit={handleSubmit}
                     className="space-y-4"
+                    aria-describedby={error ? "fleet-form-error" : undefined}
                   >
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-1">
+                      <label htmlFor="fleet-name" className="block text-sm font-medium text-slate-700 mb-1">
                         Your Name
                       </label>
                       <input
                         type="text"
-                        id="name"
+                        id="fleet-name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="John Smith"
                         required
+                        aria-invalid={!!error}
                         className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-lime focus:border-transparent transition-all"
                       />
                     </div>
 
                     <div>
-                      <label htmlFor="companyName" className="block text-sm font-medium text-slate-700 mb-1">
+                      <label htmlFor="fleet-companyName" className="block text-sm font-medium text-slate-700 mb-1">
                         Company Name
                       </label>
                       <input
                         type="text"
-                        id="companyName"
+                        id="fleet-companyName"
                         value={companyName}
                         onChange={(e) => setCompanyName(e.target.value)}
                         placeholder="Smith Trucking LLC"
@@ -309,11 +376,11 @@ export function WaitlistModal() {
                     </div>
 
                     <div>
-                      <label htmlFor="fleetSize" className="block text-sm font-medium text-slate-700 mb-1">
+                      <label htmlFor="fleet-fleetSize" className="block text-sm font-medium text-slate-700 mb-1">
                         Fleet Size
                       </label>
                       <select
-                        id="fleetSize"
+                        id="fleet-fleetSize"
                         value={fleetSize}
                         onChange={(e) => setFleetSize(e.target.value)}
                         required
@@ -329,12 +396,12 @@ export function WaitlistModal() {
                     </div>
 
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-1">
+                      <label htmlFor="fleet-email" className="block text-sm font-medium text-slate-700 mb-1">
                         Email Address
                       </label>
                       <input
                         type="email"
-                        id="email"
+                        id="fleet-email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="john@smithtrucking.com"
@@ -343,17 +410,22 @@ export function WaitlistModal() {
                       />
                     </div>
 
-                    {error && <p className="text-red-500 text-sm">{error}</p>}
+                    {error && (
+                      <p id="fleet-form-error" role="alert" aria-live="assertive" className="text-red-500 text-sm">
+                        {error}
+                      </p>
+                    )}
 
                     <Button
                       type="submit"
                       className="w-full bg-lime text-midnight hover:bg-lime/90"
                       disabled={isLoading}
+                      aria-busy={isLoading}
                     >
                       {isLoading ? (
                         <>
-                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                          Submitting...
+                          <Loader2 className="w-4 h-4 mr-2 animate-spin" aria-hidden="true" />
+                          <span role="status">Submitting...</span>
                         </>
                       ) : (
                         "Join the Network"

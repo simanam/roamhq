@@ -93,6 +93,8 @@ export function Pricing() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
+              role="article"
+              aria-label={plan.highlighted ? `${plan.name} - Most Popular` : plan.name}
               className={cn(
                 "relative rounded-2xl p-8 transition-shadow",
                 plan.highlighted
@@ -102,11 +104,14 @@ export function Pricing() {
             >
               {/* Popular badge */}
               {plan.highlighted && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span className="bg-lime text-midnight text-xs font-bold px-3 py-1 rounded-full">
-                    Most Popular
-                  </span>
-                </div>
+                <>
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2" aria-hidden="true">
+                    <span className="bg-lime text-midnight text-xs font-bold px-3 py-1 rounded-full">
+                      Most Popular
+                    </span>
+                  </div>
+                  <span className="sr-only">Most Popular Plan</span>
+                </>
               )}
 
               {/* Plan header */}
@@ -169,6 +174,7 @@ export function Pricing() {
                         "w-5 h-5 shrink-0",
                         plan.highlighted ? "text-lime" : "text-electric-indigo"
                       )}
+                      aria-hidden="true"
                     />
                     <span
                       className={plan.highlighted ? "text-slate-300" : "text-slate-600"}

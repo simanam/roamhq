@@ -111,8 +111,8 @@ export function DashboardPreview() {
                   <span className="text-white font-semibold">RoamHQ</span>
                 </div>
 
-                {/* Nav Items */}
-                <nav className="space-y-1">
+                {/* Nav Items - Decorative mockup */}
+                <nav className="space-y-1" aria-label="Dashboard navigation (mockup)">
                   {[
                     { icon: Eye, label: "Overview", active: true },
                     { icon: MapPin, label: "Live Map", active: false },
@@ -121,18 +121,19 @@ export function DashboardPreview() {
                     { icon: TrendingUp, label: "Analytics", active: false },
                     { icon: Calendar, label: "Campaigns", active: false },
                   ].map((item) => (
-                    <button
+                    <div
                       key={item.label}
+                      role="presentation"
                       className={cn(
                         "w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors",
                         item.active
                           ? "bg-electric-indigo text-white"
-                          : "text-slate-400 hover:text-white hover:bg-white/5"
+                          : "text-slate-400"
                       )}
                     >
-                      <item.icon className="w-4 h-4" />
+                      <item.icon className="w-4 h-4" aria-hidden="true" />
                       {item.label}
-                    </button>
+                    </div>
                   ))}
                 </nav>
 
@@ -167,19 +168,28 @@ export function DashboardPreview() {
                   </div>
                   <div className="hidden sm:flex items-center gap-3">
                     <div className="relative">
-                      <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
+                      <label htmlFor="dashboard-search" className="sr-only">Search dashboard</label>
+                      <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" aria-hidden="true" />
                       <input
-                        type="text"
+                        id="dashboard-search"
+                        type="search"
                         placeholder="Search..."
+                        aria-label="Search dashboard"
                         className="bg-slate-800/50 border border-white/10 rounded-lg pl-9 pr-4 py-2 text-sm text-white placeholder:text-slate-500 w-48 focus:outline-none focus:border-electric-indigo"
                       />
                     </div>
-                    <button className="p-2 rounded-lg bg-slate-800/50 text-slate-400 hover:text-white relative">
-                      <Bell className="w-5 h-5" />
-                      <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-electric-indigo rounded-full" />
+                    <button
+                      aria-label="Notifications (1 unread)"
+                      className="p-2 rounded-lg bg-slate-800/50 text-slate-400 hover:text-white relative"
+                    >
+                      <Bell className="w-5 h-5" aria-hidden="true" />
+                      <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-electric-indigo rounded-full" aria-hidden="true" />
                     </button>
-                    <button className="p-2 rounded-lg bg-slate-800/50 text-slate-400 hover:text-white">
-                      <Settings className="w-5 h-5" />
+                    <button
+                      aria-label="Settings"
+                      className="p-2 rounded-lg bg-slate-800/50 text-slate-400 hover:text-white"
+                    >
+                      <Settings className="w-5 h-5" aria-hidden="true" />
                     </button>
                   </div>
                 </div>
@@ -222,9 +232,12 @@ export function DashboardPreview() {
                         <h3 className="text-white font-medium text-sm sm:text-base">Impressions Overview</h3>
                         <p className="text-xs sm:text-sm text-slate-500">Last 7 days</p>
                       </div>
-                      <button className="hidden sm:flex items-center gap-2 text-sm text-slate-400 bg-slate-800/50 px-3 py-1.5 rounded-lg">
+                      <button
+                        className="hidden sm:flex items-center gap-2 text-sm text-slate-400 bg-slate-800/50 px-3 py-1.5 rounded-lg"
+                        aria-label="Select time period, currently showing This Week"
+                      >
                         This Week
-                        <ChevronDown className="w-4 h-4" />
+                        <ChevronDown className="w-4 h-4" aria-hidden="true" />
                       </button>
                     </div>
 
@@ -257,7 +270,7 @@ export function DashboardPreview() {
                   <div className="lg:col-span-2 bg-slate-800/30 rounded-xl p-4 sm:p-5 border border-white/5">
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="text-white font-medium text-sm sm:text-base">Live Locations</h3>
-                      <button className="text-electric-indigo text-xs sm:text-sm">View Map</button>
+                      <button className="text-electric-indigo text-xs sm:text-sm" aria-label="View full live locations map">View Map</button>
                     </div>
                     <div className="aspect-video sm:aspect-square rounded-lg relative overflow-hidden">
                       <MiniMap
@@ -278,19 +291,19 @@ export function DashboardPreview() {
                 <div className="hidden sm:block bg-slate-800/30 rounded-xl border border-white/5 overflow-hidden">
                   <div className="flex items-center justify-between p-4 sm:p-5 border-b border-white/5">
                     <h3 className="text-white font-medium text-sm sm:text-base">Active Trucks</h3>
-                    <button className="text-electric-indigo text-xs sm:text-sm">View All</button>
+                    <button className="text-electric-indigo text-xs sm:text-sm" aria-label="View all active trucks">View All</button>
                   </div>
                   <div className="overflow-x-auto">
                     <table className="w-full">
                       <thead>
                         <tr className="text-left text-xs text-slate-500 border-b border-white/5">
-                          <th className="px-5 py-3 font-medium">Truck ID</th>
-                          <th className="px-5 py-3 font-medium">Campaign</th>
-                          <th className="px-5 py-3 font-medium">Current Location</th>
-                          <th className="px-5 py-3 font-medium">Today&apos;s Miles</th>
-                          <th className="px-5 py-3 font-medium">Impressions</th>
-                          <th className="px-5 py-3 font-medium">Status</th>
-                          <th className="px-5 py-3 font-medium"></th>
+                          <th scope="col" className="px-5 py-3 font-medium">Truck ID</th>
+                          <th scope="col" className="px-5 py-3 font-medium">Campaign</th>
+                          <th scope="col" className="px-5 py-3 font-medium">Current Location</th>
+                          <th scope="col" className="px-5 py-3 font-medium">Today&apos;s Miles</th>
+                          <th scope="col" className="px-5 py-3 font-medium">Impressions</th>
+                          <th scope="col" className="px-5 py-3 font-medium">Status</th>
+                          <th scope="col" className="px-5 py-3 font-medium"><span className="sr-only">Actions</span></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -302,7 +315,7 @@ export function DashboardPreview() {
                             <td className="px-5 py-4 text-slate-400">{truck.brand}</td>
                             <td className="px-5 py-4">
                               <div className="flex items-center gap-2 text-slate-400">
-                                <MapPin className="w-4 h-4 text-electric-indigo" />
+                                <MapPin className="w-4 h-4 text-electric-indigo" aria-hidden="true" />
                                 {truck.location}
                               </div>
                             </td>
@@ -319,8 +332,11 @@ export function DashboardPreview() {
                               </span>
                             </td>
                             <td className="px-5 py-4">
-                              <button className="text-slate-500 hover:text-white">
-                                <MoreHorizontal className="w-4 h-4" />
+                              <button
+                                className="text-slate-500 hover:text-white"
+                                aria-label={`More options for truck ${truck.id}`}
+                              >
+                                <MoreHorizontal className="w-4 h-4" aria-hidden="true" />
                               </button>
                             </td>
                           </tr>

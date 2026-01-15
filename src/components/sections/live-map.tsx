@@ -224,7 +224,7 @@ export function LiveMap() {
   const routes = useMemo(() => highwayRoutes, []);
 
   return (
-    <section id="live-demo" className="py-24 bg-white">
+    <section id="live-demo" aria-labelledby="live-demo-heading" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -235,7 +235,7 @@ export function LiveMap() {
           <span className="text-electric-indigo font-semibold text-sm uppercase tracking-wider">
             Live Demo
           </span>
-          <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-midnight">
+          <h2 id="live-demo-heading" className="mt-4 text-3xl sm:text-4xl font-bold text-midnight">
             See Roam In Action
           </h2>
           <p className="mt-4 text-lg text-slate-500 max-w-2xl mx-auto">
@@ -259,21 +259,21 @@ export function LiveMap() {
                   Network Live View
                 </span>
               </div>
-              <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+              <div className="flex flex-wrap items-center gap-4 sm:gap-6" aria-live="polite" aria-atomic="true">
                 <div className="flex items-center gap-2 text-sm">
-                  <TrendingUp className="w-4 h-4 text-lime" />
+                  <TrendingUp className="w-4 h-4 text-lime" aria-hidden="true" />
                   <span className="text-slate-400">
                     {networkStats.totalMiles.toLocaleString()} miles today
                   </span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
-                  <Truck className="w-4 h-4 text-electric-indigo" />
+                  <Truck className="w-4 h-4 text-electric-indigo" aria-hidden="true" />
                   <span className="text-slate-400">
                     {networkStats.activeTrucks} trucks active
                   </span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
-                  <Clock className="w-4 h-4 text-cyan" />
+                  <Clock className="w-4 h-4 text-cyan" aria-hidden="true" />
                   <span className="text-slate-400">
                     {networkStats.hourlyImpressions.toLocaleString()}{" "}
                     impressions/hr
@@ -341,14 +341,15 @@ export function LiveMap() {
                   </div>
                   <button
                     onClick={() => setSelectedTruck(null)}
+                    aria-label="Close truck details"
                     className="text-slate-500 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors"
                   >
-                    <X className="w-4 h-4" />
+                    <X className="w-4 h-4" aria-hidden="true" />
                   </button>
                 </div>
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-slate-300">
-                    <MapPin className="w-3 h-3 text-electric-indigo shrink-0" />
+                    <MapPin className="w-3 h-3 text-electric-indigo shrink-0" aria-hidden="true" />
                     <span className="text-xs truncate">{selectedTruck.location}</span>
                   </div>
                   <div className="grid grid-cols-2 gap-2 pt-2 border-t border-white/10">

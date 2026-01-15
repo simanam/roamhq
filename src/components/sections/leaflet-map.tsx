@@ -45,7 +45,7 @@ export default function LeafletMap({
     const isMobile = window.innerWidth < 768;
     const zoomLevel = isMobile ? 3 : 4;
 
-    // Create map centered on US - disable all zoom interactions
+    // Create map centered on US - disable most zoom interactions but enable keyboard
     const mapInstance = L.map(mapContainer.current, {
       center: [39.8283, -98.5795],
       zoom: zoomLevel,
@@ -55,7 +55,7 @@ export default function LeafletMap({
       doubleClickZoom: false,
       touchZoom: false,
       boxZoom: false,
-      keyboard: false,
+      keyboard: true, // Enable keyboard navigation for accessibility
       dragging: isMobile, // Allow dragging on mobile so users can pan
     });
 
@@ -208,7 +208,12 @@ export default function LeafletMap({
           font-family: inherit;
         }
       `}</style>
-      <div ref={mapContainer} className="absolute inset-0" />
+      <div
+        ref={mapContainer}
+        className="absolute inset-0"
+        role="application"
+        aria-label="Interactive map showing truck locations across the United States. Use arrow keys to pan the map."
+      />
     </>
   );
 }

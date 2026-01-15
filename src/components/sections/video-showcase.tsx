@@ -46,10 +46,14 @@ export function VideoShowcase() {
               muted
               playsInline
               className="w-full h-auto"
+              aria-describedby="video-description"
             >
               <source src="/Mockup_05.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
+            <p id="video-description" className="sr-only">
+              Animation showing a Roam-branded truck driving on a highway, demonstrating how mobile billboard advertising works with GPS tracking.
+            </p>
 
             {/* Subtle vignette overlay */}
             <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_60%,rgba(15,23,42,0.4)_100%)]" />

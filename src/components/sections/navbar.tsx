@@ -65,11 +65,13 @@ export function Navbar() {
             className="lg:hidden p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             {isMobileMenuOpen ? (
-              <X className="w-6 h-6 text-slate-700" />
+              <X className="w-6 h-6 text-slate-700" aria-hidden="true" />
             ) : (
-              <Menu className="w-6 h-6 text-slate-700" />
+              <Menu className="w-6 h-6 text-slate-700" aria-hidden="true" />
             )}
           </button>
         </div>
@@ -79,6 +81,7 @@ export function Navbar() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
+            id="mobile-menu"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}

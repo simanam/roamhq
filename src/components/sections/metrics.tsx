@@ -152,7 +152,12 @@ export function Metrics() {
             </div>
 
             {/* Testimonial content */}
-            <div className="relative min-h-[120px]">
+            <div
+              className="relative min-h-[120px]"
+              role="region"
+              aria-label="Customer testimonials"
+              aria-live="polite"
+            >
               {testimonials.map((testimonial, index) => (
                 <motion.div
                   key={index}
@@ -162,12 +167,16 @@ export function Metrics() {
                     display: activeTestimonial === index ? "block" : "none",
                   }}
                   transition={{ duration: 0.5 }}
+                  role="tabpanel"
+                  id={`testimonial-panel-${index}`}
+                  aria-labelledby={`testimonial-tab-${index}`}
+                  hidden={activeTestimonial !== index}
                 >
                   <p className="text-xl text-slate-300 italic mb-6">
                     {testimonial.quote}
                   </p>
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-slate-700 rounded-full flex items-center justify-center text-white font-bold">
+                    <div className="w-12 h-12 bg-slate-700 rounded-full flex items-center justify-center text-white font-bold" aria-hidden="true">
                       {testimonial.author
                         .split(" ")
                         .map((n) => n[0])
@@ -187,10 +196,15 @@ export function Metrics() {
             </div>
 
             {/* Dots indicator */}
-            <div className="flex justify-center gap-2 mt-6">
-              {testimonials.map((_, index) => (
+            <div className="flex justify-center gap-2 mt-6" role="tablist" aria-label="Testimonial navigation">
+              {testimonials.map((testimonial, index) => (
                 <button
                   key={index}
+                  role="tab"
+                  id={`testimonial-tab-${index}`}
+                  aria-selected={activeTestimonial === index}
+                  aria-controls={`testimonial-panel-${index}`}
+                  aria-label={`Go to testimonial ${index + 1} by ${testimonial.author}`}
                   onClick={() => setActiveTestimonial(index)}
                   className={`w-2 h-2 rounded-full transition-colors ${
                     activeTestimonial === index
