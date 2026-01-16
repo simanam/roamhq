@@ -11,11 +11,11 @@ export function Hero() {
   const { openWaitlist } = useWaitlist();
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-slate-50 via-white to-indigo-50">
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#111827]">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Grid pattern */}
-        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.03]" />
+        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.05]" />
 
         {/* Animated route lines */}
         <svg
@@ -32,8 +32,8 @@ export function Hero() {
               y2="0%"
             >
               <stop offset="0%" stopColor="#4F46E5" stopOpacity="0" />
-              <stop offset="50%" stopColor="#4F46E5" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#06B6D4" stopOpacity="0" />
+              <stop offset="50%" stopColor="#4F46E5" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="#4F46E5" stopOpacity="0" />
             </linearGradient>
           </defs>
           {/* Animated path 1 */}
@@ -62,11 +62,11 @@ export function Hero() {
 
         {/* Floating pulse dots - decorative */}
         <motion.div
-          className="absolute top-1/4 left-1/4 w-3 h-3 bg-lime rounded-full"
+          className="absolute top-1/4 left-1/4 w-3 h-3 bg-electric-indigo rounded-full"
           aria-hidden="true"
           animate={{
             scale: [1, 1.5, 1],
-            opacity: [0.5, 1, 0.5],
+            opacity: [0.3, 0.6, 0.3],
           }}
           transition={{ duration: 2, repeat: Infinity }}
         />
@@ -75,16 +75,16 @@ export function Hero() {
           aria-hidden="true"
           animate={{
             scale: [1, 1.5, 1],
-            opacity: [0.5, 1, 0.5],
+            opacity: [0.3, 0.6, 0.3],
           }}
           transition={{ duration: 2, delay: 0.5, repeat: Infinity }}
         />
         <motion.div
-          className="absolute bottom-1/3 left-1/2 w-2.5 h-2.5 bg-cyan rounded-full"
+          className="absolute bottom-1/3 left-1/2 w-2.5 h-2.5 bg-electric-indigo rounded-full"
           aria-hidden="true"
           animate={{
             scale: [1, 1.5, 1],
-            opacity: [0.5, 1, 0.5],
+            opacity: [0.3, 0.6, 0.3],
           }}
           transition={{ duration: 2, delay: 1, repeat: Infinity }}
         />
@@ -99,82 +99,20 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 bg-electric-indigo/10 text-electric-indigo px-4 py-2 rounded-full text-sm font-medium mb-6"
-            >
-              <span className="w-2 h-2 bg-lime rounded-full animate-pulse" />
-              Now tracking 847 trucks nationwide
-            </motion.div>
-
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-midnight leading-tight">
-              Turn Every Mile Into{" "}
-              <span className="text-gradient">A Measurable Impression</span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
+              MEDIA INFRASTRUCTURE FOR THE PHYSICAL ECONOMY
             </h1>
 
-            <p className="mt-6 text-lg sm:text-xl text-slate-500 max-w-xl">
-              GPS-tracked mobile billboards. Real routes. Verified exposure.
+            <p className="mt-6 text-lg sm:text-xl text-slate-400 max-w-xl">
+              The digital world is crowded. The supply chain is not. We deploy massive brand assets on high-velocity freight corridors.
             </p>
 
             {/* CTAs */}
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="w-full sm:w-auto" onClick={() => openWaitlist("brand")}>Launch Your Campaign</Button>
-              <a href="#how-it-works" className="w-full sm:w-auto">
-                <Button variant="outline" size="lg" className="w-full">
-                  See How It Works
-                </Button>
-              </a>
-            </div>
-
-            {/* Trust indicators */}
-            <div className="mt-12 flex flex-wrap items-center gap-6 text-slate-400 text-sm">
-              <div className="flex items-center gap-2">
-                <svg
-                  className="w-5 h-5 text-lime"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  aria-hidden="true"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                No minimum spend
-              </div>
-              <div className="flex items-center gap-2">
-                <svg
-                  className="w-5 h-5 text-lime"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  aria-hidden="true"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                Launch in days
-              </div>
-              <div className="flex items-center gap-2">
-                <svg
-                  className="w-5 h-5 text-lime"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  aria-hidden="true"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                Real-time tracking
-              </div>
+              <Button size="lg" className="w-full sm:w-auto" onClick={() => openWaitlist("brand")}>VIEW ROUTE MAP</Button>
+              <Button variant="outline" size="lg" className="w-full sm:w-auto border-slate-600 text-slate-300 hover:bg-slate-800 hover:text-white" onClick={() => openWaitlist("brand")}>
+                INQUIRE FOR CAPACITY
+              </Button>
             </div>
           </motion.div>
 
@@ -191,7 +129,7 @@ export function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="relative rounded-2xl overflow-hidden shadow-2xl shadow-midnight/30"
+                className="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/50"
               >
                 <Image
                   src="/raom-container.png"
@@ -203,11 +141,11 @@ export function Hero() {
                 />
 
                 {/* Subtle overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-midnight/20 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/40 via-transparent to-transparent pointer-events-none" />
               </motion.div>
 
               {/* Decorative glow effect behind image */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-electric-indigo/20 via-lime/10 to-cyan/20 rounded-3xl blur-3xl -z-10" />
+              <div className="absolute -inset-4 bg-gradient-to-r from-electric-indigo/30 via-electric-indigo/10 to-electric-indigo/30 rounded-3xl blur-3xl -z-10" />
             </div>
 
             {/* Floating Metric Cards */}

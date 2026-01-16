@@ -9,16 +9,18 @@ const footerLinks = {
     { label: "For Fleets", href: "#for-fleets" },
   ],
   Legal: [
-    { label: "Privacy Policy", href: "#" },
-    { label: "Terms of Service", href: "#" },
-    { label: "Cookie Policy", href: "#" },
+    { label: "Privacy Policy", href: "https://www.logixtecs.com/privacy" },
+    { label: "Terms of Service", href: "https://www.logixtecs.com/terms" },
     { label: "Accessibility", href: "/accessibility" },
+  ],
+  Support: [
+    { label: "support@logixtecs.com", href: "mailto:support@logixtecs.com" },
   ],
 };
 
 export function Footer() {
   return (
-    <footer className="bg-midnight text-white">
+    <footer className="bg-[#0d1117] text-white border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Main Footer Content */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-8 lg:gap-12">
@@ -54,14 +56,12 @@ export function Footer() {
         <div className="border-t border-white/10 my-12" />
 
         {/* Bottom Row */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
-          {/* Copyright */}
+        <div className="flex flex-col items-center gap-2 text-center">
           <p className="text-slate-400 text-sm">
             &copy; {new Date().getFullYear()} Roam. All rights reserved.
           </p>
-          <span className="hidden sm:inline text-slate-600">|</span>
           <p className="text-slate-500 text-sm">
-            Made by Logixtecs Solutions LLC
+            Maintained by Logixtecs Solutions LLC
           </p>
         </div>
       </div>

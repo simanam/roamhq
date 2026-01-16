@@ -47,7 +47,7 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-24 bg-white">
+    <section id="how-it-works" className="py-24 bg-[#0d1117]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -59,10 +59,10 @@ export function HowItWorks() {
           <span className="text-electric-indigo font-semibold text-sm uppercase tracking-wider">
             How It Works
           </span>
-          <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-midnight">
+          <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-white">
             From Brief to Billboard in Days
           </h2>
-          <p className="mt-4 text-lg text-slate-500 max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-slate-400 max-w-2xl mx-auto">
             Three simple steps to get your brand on the road and start collecting verifiable impressions.
           </p>
         </motion.div>
@@ -70,7 +70,7 @@ export function HowItWorks() {
         {/* Steps */}
         <div className="relative">
           {/* Connection Line */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-electric-indigo via-cyan to-lime -translate-y-1/2 z-0" />
+          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-electric-indigo via-electric-indigo/50 to-electric-indigo -translate-y-1/2 z-0" />
 
           <div className="grid lg:grid-cols-3 gap-8 relative z-10">
             {steps.map((step, index) => (
@@ -83,46 +83,32 @@ export function HowItWorks() {
                 className="relative"
               >
                 {/* Card */}
-                <div className="bg-slate-50 rounded-2xl p-8 h-full hover:shadow-lg transition-shadow">
+                <div className="bg-slate-800/50 rounded-2xl p-8 h-full border border-slate-700/50 hover:border-slate-600/50 transition-colors">
                   {/* Step Number */}
                   <div className="flex items-center gap-4 mb-6">
-                    <div
-                      className={`w-14 h-14 rounded-xl flex items-center justify-center ${
-                        step.color === "electric-indigo"
-                          ? "bg-electric-indigo"
-                          : step.color === "cyan"
-                          ? "bg-cyan"
-                          : "bg-lime"
-                      }`}
-                    >
+                    <div className="w-14 h-14 rounded-xl flex items-center justify-center bg-electric-indigo">
                       <step.icon className="w-6 h-6 text-white" />
                     </div>
-                    <span className="text-4xl font-bold text-slate-400 font-display">
+                    <span className="text-4xl font-bold text-slate-600 font-display">
                       {step.number}
                     </span>
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-xl font-bold text-midnight mb-3">
+                  <h3 className="text-xl font-bold text-white mb-3">
                     {step.title}
                   </h3>
-                  <p className="text-slate-500 mb-6">{step.description}</p>
+                  <p className="text-slate-400 mb-6">{step.description}</p>
 
                   {/* Features */}
                   <ul className="space-y-2">
                     {step.features.map((feature) => (
                       <li
                         key={feature}
-                        className="flex items-start gap-2 text-sm text-slate-600"
+                        className="flex items-start gap-2 text-sm text-slate-400"
                       >
                         <svg
-                          className={`w-5 h-5 shrink-0 ${
-                            step.color === "electric-indigo"
-                              ? "text-electric-indigo"
-                              : step.color === "cyan"
-                              ? "text-cyan"
-                              : "text-lime"
-                          }`}
+                          className="w-5 h-5 shrink-0 text-electric-indigo"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                         >

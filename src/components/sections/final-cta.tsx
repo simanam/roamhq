@@ -9,7 +9,7 @@ export function FinalCTA() {
   const { openWaitlist } = useWaitlist();
 
   return (
-    <section className="py-24 bg-gradient-to-br from-midnight via-slate-900 to-midnight relative overflow-hidden">
+    <section className="py-24 bg-[#111827] relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0">
         {/* Animated route lines */}
@@ -17,7 +17,7 @@ export function FinalCTA() {
           <defs>
             <linearGradient id="ctaGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#4F46E5" />
-              <stop offset="100%" stopColor="#84CC16" />
+              <stop offset="100%" stopColor="#4F46E5" />
             </linearGradient>
           </defs>
           <motion.path

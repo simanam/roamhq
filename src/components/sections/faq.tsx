@@ -68,17 +68,17 @@ function FAQItem({ question, answer, id }: { question: string; answer: string; i
   const answerId = `faq-answer-${id}`;
 
   return (
-    <div className="border-b border-slate-200 last:border-0">
+    <div className="border-b border-slate-700/50 last:border-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
         aria-controls={answerId}
         className="w-full flex items-center justify-between py-4 text-left"
       >
-        <span className="font-medium text-midnight pr-8">{question}</span>
+        <span className="font-medium text-white pr-8">{question}</span>
         <ChevronDown
           className={cn(
-            "w-5 h-5 text-slate-400 shrink-0 transition-transform",
+            "w-5 h-5 text-slate-500 shrink-0 transition-transform",
             isOpen && "rotate-180"
           )}
           aria-hidden="true"
@@ -96,7 +96,7 @@ function FAQItem({ question, answer, id }: { question: string; answer: string; i
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <p className="pb-4 text-slate-500">{answer}</p>
+            <p className="pb-4 text-slate-400">{answer}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -106,7 +106,7 @@ function FAQItem({ question, answer, id }: { question: string; answer: string; i
 
 export function FAQ() {
   return (
-    <section id="faq" aria-labelledby="faq-heading" className="py-24 bg-white">
+    <section id="faq" aria-labelledby="faq-heading" className="py-24 bg-[#0d1117]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -118,10 +118,10 @@ export function FAQ() {
           <span className="text-electric-indigo font-semibold text-sm uppercase tracking-wider">
             FAQ
           </span>
-          <h2 id="faq-heading" className="mt-4 text-3xl sm:text-4xl font-bold text-midnight">
+          <h2 id="faq-heading" className="mt-4 text-3xl sm:text-4xl font-bold text-white">
             Frequently Asked Questions
           </h2>
-          <p className="mt-4 text-lg text-slate-500">
+          <p className="mt-4 text-lg text-slate-400">
             Everything you need to know about running campaigns with RoamHQ.
           </p>
         </motion.div>
@@ -139,7 +139,7 @@ export function FAQ() {
               <h3 className="text-lg font-semibold text-electric-indigo mb-4">
                 {category.category}
               </h3>
-              <div className="bg-slate-50 rounded-xl px-6">
+              <div className="bg-slate-800/50 rounded-xl px-6 border border-slate-700/50">
                 {category.questions.map((faq, index) => (
                   <FAQItem
                     key={faq.q}

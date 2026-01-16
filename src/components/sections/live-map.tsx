@@ -224,7 +224,7 @@ export function LiveMap() {
   const routes = useMemo(() => highwayRoutes, []);
 
   return (
-    <section id="live-demo" aria-labelledby="live-demo-heading" className="py-24 bg-white">
+    <section id="live-demo" aria-labelledby="live-demo-heading" className="py-24 bg-[#111827]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -235,10 +235,10 @@ export function LiveMap() {
           <span className="text-electric-indigo font-semibold text-sm uppercase tracking-wider">
             Live Demo
           </span>
-          <h2 id="live-demo-heading" className="mt-4 text-3xl sm:text-4xl font-bold text-midnight">
+          <h2 id="live-demo-heading" className="mt-4 text-3xl sm:text-4xl font-bold text-white">
             See Roam In Action
           </h2>
-          <p className="mt-4 text-lg text-slate-500 max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-slate-400 max-w-2xl mx-auto">
             Watch our network of GPS-tracked trucks travel across the country in
             real-time. Click on any truck to see its campaign details.
           </p>

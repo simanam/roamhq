@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 
 export function VideoShowcase() {
   return (
-    <section className="py-24 bg-midnight relative overflow-hidden">
+    <section className="py-24 bg-[#111827] relative overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-midnight to-slate-900" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0d1117] via-[#111827] to-[#0d1117]" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -16,7 +16,7 @@ export function VideoShowcase() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <span className="text-lime font-semibold text-sm uppercase tracking-wider">
+          <span className="text-electric-indigo font-semibold text-sm uppercase tracking-wider">
             See It In Action
           </span>
           <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-white">

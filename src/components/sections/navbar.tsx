@@ -44,14 +44,14 @@ export function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled
-          ? "bg-white/80 backdrop-blur-lg shadow-sm"
+          ? "bg-[#111827]/90 backdrop-blur-lg border-b border-slate-800"
           : "bg-transparent"
       )}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <Logo variant={isScrolled ? "dark" : "dark"} />
+          <Logo variant="light" />
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
@@ -59,7 +59,7 @@ export function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-slate-700 hover:text-electric-indigo transition-colors font-medium"
+                className="text-slate-400 hover:text-white transition-colors font-medium"
               >
                 {link.label}
               </a>
@@ -80,9 +80,9 @@ export function Navbar() {
             aria-controls="mobile-menu"
           >
             {isMobileMenuOpen ? (
-              <X className="w-6 h-6 text-slate-700" aria-hidden="true" />
+              <X className="w-6 h-6 text-white" aria-hidden="true" />
             ) : (
-              <Menu className="w-6 h-6 text-slate-700" aria-hidden="true" />
+              <Menu className="w-6 h-6 text-white" aria-hidden="true" />
             )}
           </button>
         </div>
@@ -96,14 +96,14 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white border-t border-slate-200"
+            className="lg:hidden bg-[#111827] border-t border-slate-800"
           >
             <div className="px-4 py-4 space-y-3">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="block py-2 text-slate-700 hover:text-electric-indigo font-medium"
+                  className="block py-2 text-slate-400 hover:text-white font-medium"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}

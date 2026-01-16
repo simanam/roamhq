@@ -55,7 +55,7 @@ export function DashboardPreview() {
   }, []);
 
   return (
-    <section id="dashboard" className="py-24 bg-slate-50">
+    <section id="dashboard" className="py-24 bg-[#0d1117]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -64,10 +64,10 @@ export function DashboardPreview() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-midnight">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white">
             Real-Time Campaign Intelligence
           </h2>
-          <p className="mt-4 text-lg text-slate-500 max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-slate-400 max-w-2xl mx-auto">
             Track every mile, measure every impression. Your campaign data, always at your fingertips.
           </p>
         </motion.div>
@@ -366,14 +366,14 @@ export function DashboardPreview() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="flex items-start gap-3 sm:gap-4 p-4 sm:p-6 bg-white rounded-xl shadow-sm"
+              className="flex items-start gap-3 sm:gap-4 p-4 sm:p-6 bg-slate-800/50 rounded-xl border border-slate-700/50"
             >
-              <div className="w-10 h-10 bg-electric-indigo/10 rounded-lg flex items-center justify-center shrink-0">
+              <div className="w-10 h-10 bg-electric-indigo/20 rounded-lg flex items-center justify-center shrink-0">
                 <feature.icon className="w-5 h-5 text-electric-indigo" />
               </div>
               <div>
-                <h4 className="font-semibold text-midnight text-sm sm:text-base">{feature.title}</h4>
-                <p className="text-xs sm:text-sm text-slate-500 mt-1">{feature.desc}</p>
+                <h4 className="font-semibold text-white text-sm sm:text-base">{feature.title}</h4>
+                <p className="text-xs sm:text-sm text-slate-400 mt-1">{feature.desc}</p>
               </div>
             </motion.div>
           ))}

@@ -60,44 +60,12 @@ function AnimatedCounter({
   );
 }
 
-const testimonials = [
-  {
-    quote:
-      "The GPS tracking changed everything for us. We finally have data to prove our OOH spend is working.",
-    author: "Sarah Chen",
-    title: "VP Marketing",
-    company: "TechStart Inc.",
-  },
-  {
-    quote:
-      "Launching in 12 markets simultaneously would have been impossible with traditional billboards. Roam made it simple.",
-    author: "Michael Torres",
-    title: "Media Director",
-    company: "BrandWave Agency",
-  },
-  {
-    quote:
-      "The dashboard is incredible. I can show my CEO exactly where our ads are traveling every single day.",
-    author: "Jennifer Adams",
-    title: "Brand Manager",
-    company: "Consumer Goods Co.",
-  },
-];
-
 export function Metrics() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
 
   return (
-    <section className="py-24 bg-midnight relative overflow-hidden">
+    <section className="py-24 bg-[#111827] relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-electric-indigo/5 to-transparent" />
 
@@ -117,7 +85,7 @@ export function Metrics() {
         {/* Stats Grid */}
         <div
           ref={ref}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-20"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-16"
         >
           {stats.map((stat, index) => (
             <motion.div
@@ -138,82 +106,26 @@ export function Metrics() {
           ))}
         </div>
 
-        {/* Testimonials */}
+        {/* Network Status Strip */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-3xl mx-auto"
+          className="border-t border-b border-slate-700/50 py-4"
         >
-          <div className="relative bg-slate-800/30 rounded-2xl p-8 border border-white/5">
-            {/* Quote mark */}
-            <div className="absolute -top-4 left-8 text-6xl text-electric-indigo/30 font-serif">
-              &ldquo;
-            </div>
-
-            {/* Testimonial content */}
-            <div
-              className="relative min-h-[120px]"
-              role="region"
-              aria-label="Customer testimonials"
-              aria-live="polite"
-            >
-              {testimonials.map((testimonial, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0 }}
-                  animate={{
-                    opacity: activeTestimonial === index ? 1 : 0,
-                    display: activeTestimonial === index ? "block" : "none",
-                  }}
-                  transition={{ duration: 0.5 }}
-                  role="tabpanel"
-                  id={`testimonial-panel-${index}`}
-                  aria-labelledby={`testimonial-tab-${index}`}
-                  hidden={activeTestimonial !== index}
-                >
-                  <p className="text-xl text-slate-300 italic mb-6">
-                    {testimonial.quote}
-                  </p>
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-slate-700 rounded-full flex items-center justify-center text-white font-bold" aria-hidden="true">
-                      {testimonial.author
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")}
-                    </div>
-                    <div>
-                      <div className="text-white font-semibold">
-                        {testimonial.author}
-                      </div>
-                      <div className="text-slate-500 text-sm">
-                        {testimonial.title}, {testimonial.company}
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Dots indicator */}
-            <div className="flex justify-center gap-2 mt-6" role="tablist" aria-label="Testimonial navigation">
-              {testimonials.map((testimonial, index) => (
-                <button
-                  key={index}
-                  role="tab"
-                  id={`testimonial-tab-${index}`}
-                  aria-selected={activeTestimonial === index}
-                  aria-controls={`testimonial-panel-${index}`}
-                  aria-label={`Go to testimonial ${index + 1} by ${testimonial.author}`}
-                  onClick={() => setActiveTestimonial(index)}
-                  className={`w-2 h-2 rounded-full transition-colors ${
-                    activeTestimonial === index
-                      ? "bg-electric-indigo"
-                      : "bg-slate-600"
-                  }`}
-                />
-              ))}
-            </div>
+          <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-2 text-sm font-mono tracking-wider">
+            <span className="flex items-center gap-2 text-slate-400">
+              <span className="w-2 h-2 bg-electric-indigo rounded-full animate-pulse" />
+              NETWORK STATUS: <span className="text-white">ACTIVE</span>
+            </span>
+            <span className="text-slate-600">//</span>
+            <span className="text-slate-400">
+              CURRENT FLEET AVAILABILITY: <span className="text-amber-400">LIMITED</span>
+            </span>
+            <span className="text-slate-600">//</span>
+            <span className="text-slate-400">
+              NEXT DEPLOYMENT: <span className="text-white">Q1 2026</span>
+            </span>
           </div>
         </motion.div>
       </div>
